@@ -1,29 +1,20 @@
 import { Module } from '@nestjs/common';
-import { RestModule } from './rest/rest.module';
-import { CoreModule } from './core/core.module';
-import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { join } from 'path';
-import { UserEntity } from './core/entities/user-entity';
-
-const databaseConfiguration: TypeOrmModuleOptions = {
-  type: 'mysql',
-  host: 'localhost',
-  port: 3306,
-  username: 'root',
-  password: 'root',
-  database: 'nest_security',
-  poolSize: 50,
-  synchronize: true,
-  entities: [UserEntity],
-};
+import { InterfaceController } from './rest/interface/interface.controller';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { databaseConfiguration } from './core/configs/database.config';
 
 @Module({
   imports: [
-    RestModule,
-    CoreModule,
-    TypeOrmModule.forRoot(databaseConfiguration),
+    ConfigModule.forRoot(),
+    TypeOrmModule.forRootAsync(databaseConfiguration),
   ],
-  controllers: [],
+  controllers: [InterfaceController],
   providers: [],
 })
-export class AppModule {}
+export class AppModule {
+  public static port: number;
+  constructor(private configService: ConfigService) {
+    AppModule.port = this.configService.get<number>('APP_PORT');
+  }
+}
