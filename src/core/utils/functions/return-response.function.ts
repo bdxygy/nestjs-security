@@ -11,5 +11,5 @@ export function ReturnResponse(
     ...responseObject,
     statusCode: status,
   };
-  responseContext.status(status).json(response);
+  responseContext.status(status).send(response);
 }

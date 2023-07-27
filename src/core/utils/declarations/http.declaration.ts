@@ -1,5 +1,6 @@
-import { Request, Response, NextFunction } from 'express';
+// import { Request, Response, NextFunction } from 'express';
+import { FastifyRequest as Request, FastifyReply as Response } from 'fastify';
 
-export interface HttpRequest extends Request {}
-export interface HttpResponse extends Response {}
-export interface HttpNextFunction extends NextFunction {}
+export type HttpRequest = Request;
+export type HttpResponse = Response;
+export type HttpNextFunction = () => void;
