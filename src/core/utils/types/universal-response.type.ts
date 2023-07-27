@@ -4,5 +4,5 @@ export type UniversalResponseType<T = null> = {
   data: T;
   error: string | null;
   message: string;
-  statusCode: HttpStatus;
+  statusCode: HttpStatus | number;
 };

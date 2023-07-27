@@ -1,6 +1,6 @@
 import { HttpStatus } from '@nestjs/common';
-import { UniversalResponseType } from '../types/universal-response.type';
-import { HttpResponse } from '../declarations/http.declaration';
+import { UniversalResponseType } from '../../types/universal-response.type';
+import { HttpResponse } from '../../declarations/http.declaration';
 
 export class UniversalResponse {
   public static return(

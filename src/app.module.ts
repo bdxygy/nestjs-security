@@ -3,6 +3,7 @@ import { InterfaceController } from './rest/interface/interface.controller';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { databaseConfiguration } from './core/configs/database.config';
+import { UserRepository } from './core/repositories/user.repository';
 
 @Module({
   imports: [
@@ -10,7 +11,7 @@ import { databaseConfiguration } from './core/configs/database.config';
     TypeOrmModule.forRootAsync(databaseConfiguration),
   ],
   controllers: [InterfaceController],
-  providers: [],
+  providers: [UserRepository],
 })
 export class AppModule {
   public static port: number;

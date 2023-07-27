@@ -4,11 +4,14 @@ import {
 } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { HttpException, HttpStatus } from '@nestjs/common';
+// import { UserEntity } from '../entities/user.entity';
+import { UserRepository } from '../repositories/user.repository';
 
 class TypeOrmConfiguration {
   public static use(configService: ConfigService): TypeOrmModuleOptions {
     const databaseOptions = {
-      type: configService.get('DATABASE_TYPE'),
+      // type: configService.get('DATABASE_TYPE'),
+      type: 'mysql',
       database: configService.get<string>('DATABASE_NAME'),
       host: configService.get<string>('DATABASE_HOST'),
       port: configService.get<number>('DATABASE_PORT'),
@@ -17,6 +20,7 @@ class TypeOrmConfiguration {
       poolSize: configService.get<number>('DATABASE_POOL'),
       synchronize: configService.get<boolean>('DATABASE_SYNC'),
       autoLoadEntities: configService.get<boolean>('DATABASE_AUTOLOAD'),
+      entities: [UserRepository],
       logger: 'debug',
     } as TypeOrmModuleOptions;
 
