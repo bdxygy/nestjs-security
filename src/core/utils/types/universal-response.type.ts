@@ -1,6 +1,6 @@
 import { HttpStatus } from '@nestjs/common';
 
-export type UniversalResponse<T = null> = {
+export type UniversalResponseType<T = null> = {
   data: T;
   error: string | null;
   message: string;
