@@ -1,16 +1,14 @@
-import { Controller, Get, HttpStatus } from '@nestjs/common';
-import { UniversalResponse } from 'src/core/utils/types/universal-response.type';
-
+import { Controller, Get, HttpStatus, Res } from '@nestjs/common';
+import { HttpResponse } from 'src/core/utils/declarations/http.declaration';
+import { ReturnResponse } from 'src/core/utils/functions/return-response.function';
 @Controller('interface')
 export class InterfaceController {
-
   @Get()
-  public home(): UniversalResponse<null> {
-    return {
-      statusCode: HttpStatus.ACCEPTED,
-      message: 'Welcome Hero!',
+  public home(@Res() response: HttpResponse) {
+    ReturnResponse(response, HttpStatus.OK, {
+      message: 'Welcome New Hero!',
       error: null,
       data: null,
-    };
+    });
   }
 }
